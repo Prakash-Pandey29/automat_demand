@@ -55,7 +55,7 @@ demand_data = demand_data[~demand_data['Ramp Down Reason'].isin(['InCorrect Dema
 demand_data[demand_data['Ops Planned Date']==demand_data['Ops Planned Date'].min()]['Ramp Down Reason'].value_counts(dropna=False)
 
 # input the desired month (e.g August 2023 )
-month = "August 2023"
+month = input("Please enter the month in this format (e.g August 2023) : ")
 
 #creating the reporting status column below:
 
@@ -153,6 +153,8 @@ result = pd.merge(merged_pivot, prior_fulfulled_input_month_bsd, on="Customer Na
 print(result.shape)
 print(result)
 
+# saving the file
+result.to_excel('./automat.xlsx') #(you can change the name and location from here)
 
 
 
