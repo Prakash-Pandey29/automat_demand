@@ -175,9 +175,10 @@ if st.button("Run Code"):
         # prior fulfilled , input month bsd
         prior_fulfulled_input_month_bsd = demand_data[demand_data.Reporting_status==f'Prior Fulfilled, {month[:3]} BSD']
         prior_fulfulled_input_month_bsd = prior_fulfulled_input_month_bsd.groupby('Customer Name', as_index=False)['FTE'].sum()
-        prior_fulfulled_input_month_bsd.rename({'Stream1':f'{month[:3]} BSD'}, inplace=True, axis=1)
+        prior_fulfulled_input_month_bsd.rename({'FTE':f'{month[:3]} BSD'}, inplace=True, axis=1)
 
         result = pd.merge(merged_pivot, prior_fulfulled_input_month_bsd, on="Customer Name", how="left")
+
 
 
         #       # # buffer to use for excel writer
