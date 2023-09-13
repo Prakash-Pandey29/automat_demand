@@ -5,10 +5,10 @@ from datetime import datetime
 
 #import your file
 # demand data loading
-demand_data = pd.read_excel('All Demands_08Sep.xlsx', engine='openpyxl')
+demand_data = pd.read_excel('.data/All Demands_08Sep.xlsx', engine='openpyxl')
 
 # mapping data loading
-map_data = pd.read_excel('Mapping.xlsx', engine='openpyxl')
+map_data = pd.read_excel('./data/Mapping.xlsx', engine='openpyxl')
 
 # saving the different mappings for BU in a dictionary
 map_dictionary = {}
@@ -154,7 +154,7 @@ print(result.shape)
 print(result)
 
 # saving the file
-result.to_excel('./automat.xlsx') #(you can change the name and location from here)
+result.to_excel('./result/automat.xlsx') #(you can change the name and location from here)
 
 
 
