@@ -5,7 +5,7 @@ from datetime import datetime
 
 #import your file
 # demand data loading
-demand_data = pd.read_excel('All Demands_Data Dump.xlsx', engine='openpyxl')
+demand_data = pd.read_excel('All Demands_08Sep.xlsx', engine='openpyxl')
 
 # mapping data loading
 map_data = pd.read_excel('Mapping.xlsx', engine='openpyxl')
@@ -73,7 +73,7 @@ demand_data.loc[(demand_data.Status!='Fulfilled'), 'Reporting_status'] = 'D Univ
 filter_date = datetime.strptime(month, '%B %Y')
 demand_data['B_start_month'] = pd.to_datetime(demand_data['B_start_month'], format='%B %Y')
 demand_data['Status_month'] = pd.to_datetime(demand_data['Status_month'], format='%B %Y')
-demand_data = demand_data[~((demand_data.B_start_month<filter_date) & (demand_data.Status_month<filter_date))]
+demand_data = demand_data[~((demand_data.B_start_month<filter_date) & (demand_data.Status_month<filter_date) & (demand_data.Status=="Fulfilled"))]
 
 #changing type of the column into string
 demand_data['Status_month'] = demand_data['Status Date'].dt.strftime('%B %Y')
@@ -145,8 +145,8 @@ merged_pivot = pd.merge(pivot_demand_universe, pivot_demand_universe_with_ops_p_
 
 # prior fulfilled , input month bsd
 prior_fulfulled_input_month_bsd = demand_data[demand_data.Reporting_status==f'Prior Fulfilled, {month[:3]} BSD']
-prior_fulfulled_input_month_bsd = prior_fulfulled_input_month_bsd.groupby('Customer Name', as_index=False)['Stream1'].count()
-prior_fulfulled_input_month_bsd.rename({'Stream1':f'{month[:3]} BSD'}, inplace=True, axis=1)
+prior_fulfulled_input_month_bsd = prior_fulfulled_input_month_bsd.groupby('Customer Name', as_index=False)['FTE'].sum()
+prior_fulfulled_input_month_bsd.rename({'FTE':f'{month[:3]} BSD'}, inplace=True, axis=1)
 
 result = pd.merge(merged_pivot, prior_fulfulled_input_month_bsd, on="Customer Name", how="left")
 
