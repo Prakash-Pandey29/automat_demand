@@ -83,7 +83,7 @@ if st.button("Run Code"):
         demand_data[demand_data['Ops Planned Date']==demand_data['Ops Planned Date'].min()]['Ramp Down Reason'].value_counts(dropna=False)
 
         # input the desired month (e.g August 2023 )
-        month = "August 2023"
+        month = date_input
 
         #creating the reporting status column below:
 
